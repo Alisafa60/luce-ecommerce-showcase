@@ -246,7 +246,7 @@ The backend follows a layered architecture:
 
 The backend is responsible for product catalog management, categories, colors, palettes, product images, inventory behavior, essential product marking, recommendation logic, and Lucene.NET search indexing.
 
-The project models ecommerce behavior beyond generic CRUD by encoding variant, palette, search, and recommendation rules into the product model.
+Product behavior is modeled around variant handling, palette relationships, search metadata, recommendations, and media mapping so the frontend can present products accurately across listing, detail, search, and cart flows.
 
 ---
 
