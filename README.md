@@ -86,7 +86,7 @@ Important UX decisions include:
 - Swipe-aware mobile interactions
 - Desktop layouts that preserve the same premium visual direction while using the available space more effectively
 
-![Mobile hero](assets/screenshots/mobile/mobile-hero.png)
+<img src="assets/screenshots/mobile/mobile-hero.png" alt="Mobile hero" width="260" />
 
 ![Desktop category discovery](assets/screenshots/desktop/desktop-category-discovery.png)
 
@@ -107,7 +107,7 @@ Example categories include:
 - Extensions
 - Accessories
 
-![Mobile navigation](assets/screenshots/mobile/mobile-navigation-menu.png)
+<img src="assets/screenshots/mobile/mobile-navigation-menu.png" alt="Mobile navigation" width="260" />
 ![Desktop navigation](assets/screenshots/desktop/desktop-navigation-menu.png)
 
 ---
@@ -118,7 +118,7 @@ The product grid is designed to keep attention on the products.
 
 It uses large imagery, generous padding, minimal card chrome, quick product actions, and color or palette indicators depending on the product type.
 
-![Mobile product grid](assets/screenshots/mobile/mobile-product-grid.png)
+<img src="assets/screenshots/mobile/mobile-product-grid.png" alt="Mobile product grid" width="260" />
 
 ![Desktop product grid](assets/screenshots/desktop/desktop-product-grid.png)
 
@@ -132,7 +132,7 @@ Plain products can show selectable color swatches that update the product image.
 
 This keeps the product grid minimal while preserving accurate color and variant behavior.
 
-![Selected color behavior](assets/screenshots/mobile/mobile-product-grid-selected-colors.png)
+<img src="assets/screenshots/mobile/mobile-product-grid-selected-colors.png" alt="Selected color behavior" width="260" />
 
 ---
 
@@ -144,7 +144,7 @@ On mobile, product information appears in a bottom sheet. On desktop, it appears
 
 The detail view includes product images, price, sale price, fabric, dimensions, description, add-to-bag action, and color or palette information.
 
-![Mobile product quick view](assets/screenshots/mobile/mobile-product-quick-view.png)
+<img src="assets/screenshots/mobile/mobile-product-quick-view.png" alt="Mobile product quick view" width="260" />
 
 ![Desktop product modal](assets/screenshots/desktop/desktop-product-modal.png)
 
@@ -170,9 +170,9 @@ It understands product concepts such as:
 
 For example, when searching by color, a plain scarf can show a direct matching swatch, while a printed scarf can match because the print contains that color. The search results respect the difference instead of flattening both products into the same behavior.
 
-![Mobile search results](assets/screenshots/mobile/mobile-search-results.png)
+<img src="assets/screenshots/mobile/mobile-search-results.png" alt="Mobile search results" width="260" />
 
-![Search refinement sheet](assets/screenshots/mobile/mobile-search-refinement-sheet.png)
+<img src="assets/screenshots/mobile/mobile-search-refinement-sheet.png" alt="Search refinement sheet" width="260" />
 
 ---
 
@@ -184,7 +184,7 @@ The product listing supports dynamic filters such as color, fabric, texture, pri
 
 On mobile, filters appear in a bottom sheet with a native-feeling interaction pattern.
 
-![Mobile filter sheet](assets/screenshots/mobile/mobile-filter-sheet.png)
+<img src="assets/screenshots/mobile/mobile-filter-sheet.png" alt="Mobile filter sheet" width="260" />
 
 ---
 
@@ -203,7 +203,7 @@ The recommendation logic follows a fallback chain:
 
 This makes recommendations feel connected to the selected product instead of random.
 
-![Recommendation sheet](assets/screenshots/mobile/mobile-recommendation-sheet.png)
+<img src="assets/screenshots/mobile/mobile-recommendation-sheet.png" alt="Recommendation sheet" width="260" />
 
 ---
 
@@ -213,7 +213,7 @@ The cart is designed as part of the shopping experience rather than a disconnect
 
 It supports product review, quantity updates, variant-aware cart items, item deletion, and total price display in a mobile-first layout.
 
-![Mobile cart](assets/screenshots/mobile/mobile-cart.png)
+<img src="assets/screenshots/mobile/mobile-cart.png" alt="Mobile cart" width="260" />
 
 ---
 
