@@ -108,6 +108,7 @@ Example categories include:
 - Accessories
 
 <img src="assets/screenshots/mobile/mobile-navigation-menu.png" alt="Mobile navigation" width="260" />
+
 ![Desktop navigation](assets/screenshots/desktop/desktop-navigation-menu.png)
 
 ---
