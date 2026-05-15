@@ -128,7 +128,7 @@ It uses large imagery, generous padding, minimal card chrome, quick product acti
 
 Plain and printed products are presented differently to match how customers browse them.
 
-Plain products can show selectable color swatches that update the product image. Printed products can show a compact palette preview, with fuller color details available in the product detail view.
+Plain products can show selectable color swatches that update the product image. Printed products can show a compact palette preview drop down menu, with fuller color details available in the product detail or quick product view.
 
 This keeps the product grid minimal while preserving accurate color and variant behavior.
 
