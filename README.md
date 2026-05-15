@@ -107,6 +107,7 @@ Example categories include:
 - Extensions
 - Accessories
 
+![Mobile navigation](assets/screenshots/mobile/mobile-navigation-menu.png)
 ![Desktop navigation](assets/screenshots/desktop/desktop-navigation-menu.png)
 
 ---
