@@ -1,8 +1,10 @@
-# LUCE — Fashion Ecommerce Platform
+ # LUCE — Fashion Ecommerce Platform
 
 LUCE is a personal full-stack fashion ecommerce platform built with React, TypeScript, ASP.NET Core, PostgreSQL, and Lucene.NET.
 
-The project focuses on creating a premium, mobile-first shopping experience for scarves and modest fashion products, with careful attention to product presentation, search quality, color handling, recommendations, and responsive UI behavior.
+The project was built from the perspective of a business owner in the modest fashion and headscarf space, where many retailers rely on generic ecommerce tools that do not fully reflect how their products are browsed, styled, searched, and sold.
+
+LUCE explores what a more tailored software experience for this category can look like: a premium mobile-first storefront, color-aware product discovery, refined product presentation, intelligent recommendations, and admin workflows designed around real catalog and merchandising needs.
 
 The source code is private, but this repository presents the product concept, UI/UX direction, screenshots, architecture, and implementation thinking behind the platform.
 
@@ -16,11 +18,11 @@ The source code is private, but this repository presents the product concept, UI
 
 ## Overview
 
-LUCE is designed around the way fashion products are actually browsed and purchased.
+LUCE is designed around how modest fashion and scarf products are browsed, styled, searched, and purchased.
 
-The platform supports a variety of fashion products, with special handling for plain and printed scarves, color variants, palette-based products, and essential accessories. The interface is intentionally minimal and product-first, using photography, spacing, color, and subtle interactions to create a premium shopping experience without overwhelming the customer.
+The platform supports a variety of fashion products, with special handling for scarf-specific behavior such as plain colors, printed palettes, fabric differences, color variants, essentials, and accessories. The interface is intentionally minimal and product-first, using photography, spacing, color, and subtle interactions to create a premium shopping experience without overwhelming the customer.
 
-The project is not only a storefront UI. It includes business-specific product modeling, intelligent search, dynamic filtering, color-aware recommendations, admin catalog management, and backend architecture designed around maintainability and performance.
+The project is not only a storefront UI. It includes product modeling, search and filtering, color-aware recommendations, admin catalog management, and backend architecture designed around maintainability and performance.
 
 ---
 
@@ -46,12 +48,11 @@ The project is not only a storefront UI. It includes business-specific product m
 ### Product Discovery
 
 - Lucene.NET full-text indexing and retrieval
-- Taxonomy-aware query interpretation
-- Exact, analyzed, and fuzzy matching
-- Edit-distance typo tolerance
+- Taxonomy-aware search behavior
+- Exact and fuzzy matching support
+- Typo-tolerant search handling
 - Dynamic faceting and refinements
-- Intent-aware constraints for category, fabric, color, and texture searches
-- Color-intent-aware matching and ranking
+- Color-aware product matching and ranking
 
 ---
 
@@ -59,14 +60,14 @@ The project is not only a storefront UI. It includes business-specific product m
 
 The search system is designed to preserve user intent while still handling imperfect queries, missing terms, and changing catalog data.
 
-Key implementation details include:
+Key implementation areas include:
 
-- Intent-preserving query behavior across category, fabric, color, and texture constraints
-- Staged retrieval pipeline using strict, relaxed, and fallback search phases
-- Deterministic hit merging to avoid duplicate or unstable result ordering
-- Search UX metadata such as did-you-mean suggestions, search outcome hints, and matched color chips
-- Versioned caching with explicit invalidation when catalog/search data changes
-- Media data integrity through database-authoritative image mapping and file-existence validation
+- Search behavior that respects category, fabric, color, and texture intent
+- Multi-stage retrieval to balance precision with fallback behavior
+- Stable result handling to avoid duplicate or inconsistent search results
+- Search UX metadata such as suggestion hints, outcome messages, and matched color chips
+- Cache invalidation patterns for keeping catalog/search data consistent
+- Media validation to keep product images aligned with database records
 
 ---
 
@@ -94,7 +95,7 @@ Important UX decisions include:
 
 ## Navigation
 
-The navigation is built around customer intent instead of a simple dropdown menu.
+The navigation is built around how customers browse scarf and modest fashion products: by shape, purpose, fabric, styling need, and accessory type instead of a simple generic category menu.
 
 Customers can browse through main and child categories with supporting imagery. One category section is opened by default, giving the customer a clear starting point while still exposing the full product structure.
 
@@ -125,13 +126,13 @@ It uses large imagery, generous padding, minimal card chrome, quick product acti
 
 ---
 
-## Plain and Printed Product Behavior
+## Product Presentation Behavior
 
-Plain and printed products are presented differently to match how customers browse them.
+Different product types are presented in ways that match how customers evaluate them.
 
-Plain products can show selectable color swatches that update the product image. Printed products can show a compact palette preview drop down menu, with fuller color details available in the product detail or quick product view.
+Plain products can show selectable color swatches that update the product image. Printed or palette-based products can show compact color previews, with fuller color details available in the product detail or quick product view.
 
-This keeps the product grid minimal while preserving accurate color and variant behavior.
+This keeps the product grid minimal while preserving accurate color, variant, and browsing behavior.
 
 <img src="assets/screenshots/mobile/mobile-product-grid-selected-colors.png" alt="Selected color behavior" width="260" />
 
@@ -157,7 +158,7 @@ The detail view includes product images, price, sale price, fabric, dimensions, 
 
 Search is built with Lucene.NET and designed around real ecommerce discovery behavior.
 
-The search system supports exact matching, analyzed matching, fuzzy fallback, stemming, typo tolerance, edit-distance correction, taxonomy-aware ranking, and attribute-aware product matching.
+The search system supports exact matching, fuzzy fallback, typo-tolerant behavior, taxonomy-aware ranking, and attribute-aware product matching.
 
 It understands product concepts such as:
 
@@ -181,7 +182,7 @@ For example, when searching by color, a plain scarf can show a direct matching s
 
 Filters are designed to be easy to reach without taking over the shopping experience.
 
-The product listing supports dynamic filters such as color, fabric, texture, price, and category tags. Color filters are generated from the current product set and sorted using LAB color distance, giving the color list a more natural visual order than random or alphabetical sorting.
+The product listing supports dynamic filters such as color, fabric, texture, price, and category tags. Color filters are generated from the current product set and ordered to feel visually natural instead of random or purely alphabetical.
 
 On mobile, filters appear in a bottom sheet with a native-feeling interaction pattern.
 
@@ -191,18 +192,11 @@ On mobile, filters appear in a bottom sheet with a native-feeling interaction pa
 
 ## Recommendations
 
-When a customer adds a scarf to the cart, the platform can recommend a matching essential item.
+Recommendations are designed around styling and outfit-completion behavior rather than random upsells.
 
-Essentials are products marked by the admin, such as bonnets, underscarves, pins, and accessories.
+When a customer adds a scarf to the cart, the platform can suggest relevant essentials such as bonnets, underscarves, pins, or accessories based on the selected product context.
 
-The recommendation logic follows a fallback chain:
-
-1. Find an essential product with the same color.
-2. If no exact match exists, find a visually similar shade using LAB color distance.
-3. If no similar shade exists, fall back to neutral essentials such as ivory or off-white.
-4. Show additional tailored recommendations below the main suggestion.
-
-This makes recommendations feel connected to the selected product instead of random.
+This makes recommendations feel connected to how the product is actually worn and styled.
 
 <img src="assets/screenshots/mobile/mobile-recommendation-sheet.png" alt="Recommendation sheet" width="260" />
 
@@ -222,6 +216,8 @@ It supports product review, quantity updates, variant-aware cart items, item del
 
 The platform includes admin-facing catalog workflows for managing products, attributes, media, inventory, and product discovery data.
 
+The admin workspace is designed for catalog workflows where color accuracy, product imagery, fabric metadata, stock state, and product presentation directly affect the shopping experience.
+
 Admin functionality includes:
 
 - Product creation and editing through a multi-step workspace
@@ -230,8 +226,8 @@ Admin functionality includes:
 - Plain versus printed product configuration
 - Product-level and color-specific image mapping
 - Draft autosave for product creation flows
-- Database-authoritative media selection with file-existence validation
-- Server-side media optimization with WebP conversion, EXIF removal, and generated thumbnail/detail/hero variants
+- Media validation to keep product images aligned with product records
+- Server-side media optimization for storefront, detail, and preview usage
 - Essential product marking for recommendation behavior
 
 ![Admin product workspace](assets/screenshots/admin/admin-product-workspace.png)
@@ -244,37 +240,26 @@ The backend follows a layered architecture:
 
 `Controller → Service → Repository → DbContext → PostgreSQL`
 
-The backend is responsible for product catalog management, categories, colors, palettes, product images, inventory behavior, essential product marking, recommendation logic, and Lucene.NET search indexing.
+The backend handles product catalog management, categories, colors, palettes, product images, inventory behavior, essential product marking, recommendation logic, and Lucene.NET search indexing.
 
-Product behavior is modeled around variant handling, palette relationships, search metadata, recommendations, and media mapping so the frontend can present products accurately across listing, detail, search, and cart flows.
+Product behavior is modeled around variant handling, palette relationships, search metadata, recommendations, and media mapping, keeping the storefront logic consistent across listing, detail, search, and cart flows.
 
 ---
 
 ## Data Modeling
 
-The relational model includes concepts such as:
+The data model is designed around catalog consistency, product discovery, and accurate storefront behavior.
 
-- Products
-- Product colors
-- Product images
-- Printed palettes
-- Dominant colors
-- Main and child categories
-- Fabrics
-- Textures
-- Tags
-- Inventory
-- Essential products
-- Recommendation attributes
+It supports structured relationships between products, colors, images, categories, fabrics, textures, tags, inventory, recommendations, and admin-managed attributes.
 
-The model is designed so the frontend can behave correctly without relying on fragile UI-only assumptions.
+This allows the frontend to present products accurately without relying on fragile UI-only assumptions.
 
 For example:
 
-- Plain color selection maps to real product color and image data.
-- Printed palettes are handled differently from plain color variants.
+- Product images can be mapped to specific colors or product states.
+- Plain and printed products can have different presentation behavior.
 - Search can distinguish direct color matches from contained palette colors.
-- Recommendations can use selected color, product type, color family, and fallback neutral colors.
+- Recommendations can use selected product context, color families, and neutral fallback options.
 
 ---
 
@@ -289,8 +274,8 @@ Important considerations include:
 - Separating Lucene search results from relational product retrieval
 - Avoiding unnecessary over-fetching
 - Keeping product discovery queries efficient
-- Optimizing uploaded product media into purpose-specific WebP variants
-- Using versioned cache keys and explicit invalidation for stale-data control
+- Optimizing uploaded product media for different storefront uses
+- Using cache invalidation patterns for stale-data control
 - Designing APIs around actual UI usage instead of generic data dumping
 
 ---
@@ -305,11 +290,10 @@ It highlights:
 - Responsive desktop and mobile layouts
 - App-like ecommerce interactions
 - Custom touch behavior without a heavy UI component framework
-- Business-specific relational modeling
+- Business-specific product modeling
 - Lucene.NET search integration
 - Taxonomy-aware filtering and query interpretation
 - Dynamic color and palette systems
-- LAB-distance color matching
-- Intelligent recommendations
+- Color-aware recommendations
 - Performance-aware backend design
-- Clean separation between controllers, services, repositories, and database logic
+- Clean separation between controllers, services, repositories, and database
