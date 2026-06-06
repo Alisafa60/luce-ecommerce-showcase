@@ -120,7 +120,7 @@ Search is powered by Lucene.NET and designed around structured ecommerce discove
 
 The system interprets customer intent around attributes such as category, fabric, color, texture, print, size, and tags. It supports strict, relaxed, and fuzzy fallback search stages, inventory-aware suggestions, and dynamic refinements that stay useful without losing the customer's intent.
 
-For example, a query like `crimson lulua` can be treated as structured intent: color = crimson and fabric = lulua. The main results can stay precise while refinements still help the customer explore related available inventory.
+For example, a query like `Sky Blue Cotton` can be treated as structured intent: color = Sky Blue and fabric = Cotton. Lulua for instance, in the screenshot, is a variant of cotton, while navy is of the same color family as Sky Blue. These family members are detected but get a lower search score. The main results too can stay precise while refinements still help the customer explore related available inventory.
 
 <img src="assets/screenshots/mobile/mobile-search-results.png" alt="Mobile search results" width="260" />
 
