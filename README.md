@@ -8,6 +8,8 @@ LUCE explores what a more tailored software experience for this category can loo
 
 The product is planned for public launch after final product photography and catalog preparation. Until then, this repository presents the product concept, UI/UX direction, screenshots, architecture, and implementation thinking behind the platform. The source code is private.
 
+I designed and implemented the full UI/UX, frontend, backend, search, recommendation logic, authentication model, and admin workflows end to end.
+
 ---
 
 ## Preview
