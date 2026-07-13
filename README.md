@@ -6,7 +6,7 @@ The project was built from the perspective of a business owner in a niche retail
 
 The source code is private. This repository presents the product concept, UI/UX direction, screenshots, architecture, and implementation approach without exposing the full domain or business logic.
 
-Current test deployment: [https://luce-byi.pages.dev/](https://luce-byi.pages.dev/)
+Current deployment: [https://luce-byi.pages.dev/](https://luce-byi.pages.dev/)
 
 I designed and implemented the full UI/UX, frontend, backend, search, recommendation logic, authentication model, and admin workflows end to end.
 
@@ -37,9 +37,9 @@ It includes:
 
 ---
 
-## Current Demo Status
+## Current Deployment Status
 
-The project is currently deployed in a test environment at [https://luce-byi.pages.dev/](https://luce-byi.pages.dev/).
+The project is currently deployed at [https://luce-byi.pages.dev/](https://luce-byi.pages.dev/). This deployment is close to the final production shape, but it currently runs with a smaller resource allocation while the catalog and launch setup are still being prepared.
 
 Important notes:
 
@@ -50,6 +50,21 @@ Important notes:
 - Data can be added through the admin form page. Contact me if you want temporary admin access for review.
 - Customer login is designed around WhatsApp-based phone verification. The customer-facing WhatsApp delivery is not enabled yet because the final WhatsApp Business number has not been added/bought.
 - The authentication logic is implemented and currently supports development/test verification flow until the final WhatsApp Business setup is connected.
+
+---
+
+## Deployment And Infrastructure
+
+The current deployment is split across application hosting, database/runtime infrastructure, and object storage:
+
+- Frontend: deployed on Cloudflare Pages.
+- Backend: ASP.NET Core API containerized with Docker and deployed on a Hetzner server.
+- Database: PostgreSQL runs with the backend through Docker Compose.
+- Search index: Lucene.NET index data is kept on a persistent Docker volume.
+- Media storage: product images are stored and served through Cloudflare R2.
+- Backend runtime: Docker Compose runs the API and PostgreSQL together, with environment-based configuration for production services.
+
+This keeps the storefront globally accessible through Cloudflare while the backend, database, search index, and admin workflows run in a controlled server environment.
 
 ---
 
@@ -91,6 +106,8 @@ Examples include keeping media mappings, product variants, stock state, catalog 
 - JWT authentication with database-backed refresh tokens
 - Lucene.NET search service
 - Server-side image processing with ImageSharp
+- Dockerized backend runtime with Docker Compose for API and PostgreSQL
+- Cloudflare R2-compatible object storage for product media
 
 ### Media Pipeline
 
