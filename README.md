@@ -1,12 +1,12 @@
-# LUCE Ecommerce Platform
+# LUCE Ecommerce Platform Showcase
 
 LUCE is a full-stack ecommerce platform designed for modest fashion and headscarf retail.
 
-The project was built from the perspective of a business owner in a niche retail space where generic ecommerce tools often fall short. Headscarf products are not only browsed by name, price, and category, but also by fabric, shape, opacity, color family, printed palette, styling need, and how well they pair with essentials such as underscarves and accessories.
+The project was built from the perspective of a business owner in a niche retail space where generic ecommerce tools often fall short. LUCE focuses on a premium mobile-first storefront, structured catalog discovery, secure account flows, and admin workflows that support real product preparation before launch.
 
-LUCE explores what a more tailored software experience for this category can look like: a premium mobile-first storefront, structured commerce search, color-aware product discovery, personalized recommendations, secure customer accounts, and admin workflows designed around real catalog and merchandising needs.
+The source code is private. This repository presents the product concept, UI/UX direction, screenshots, architecture, and implementation approach without exposing the full domain or business logic.
 
-The product is planned for public launch after final product photography and catalog preparation. Until then, this repository presents the product concept, UI/UX direction, screenshots, architecture, and implementation thinking behind the platform. The source code is private.
+Current test deployment: [https://luce-byi.pages.dev/](https://luce-byi.pages.dev/)
 
 I designed and implemented the full UI/UX, frontend, backend, search, recommendation logic, authentication model, and admin workflows end to end.
 
@@ -20,20 +20,36 @@ I designed and implemented the full UI/UX, frontend, backend, search, recommenda
 
 ## What I Built
 
-LUCE is a full-stack ecommerce system shaped around how modest fashion and scarf products are browsed, styled, searched, recommended, and sold.
+LUCE is a full-stack ecommerce system shaped around how modest fashion and scarf products are browsed, styled, searched, managed, and sold.
 
 It includes:
 
 - A premium responsive storefront with a mobile-first, app-like feel
-- Category discovery built around scarf shapes, fabrics, styling needs, essentials, and accessories
+- Category discovery tailored to the product domain
 - Product grids with color and palette-aware presentation
 - Product detail and quick-view flows optimized for uninterrupted browsing
-- Lucene.NET-powered structured search with suggestions, facets, and fallback stages
-- Color-aware recommendation logic for matching scarves with essentials and accessories
+- Lucene.NET-powered structured search with suggestions and refinements
+- Context-aware recommendation surfaces
 - Cart flows with contextual recommendations
-- Customer authentication with refresh-token-based sessions
+- Customer authentication architecture with refresh-token-based sessions
 - Admin catalog tooling for products, media, inventory, attributes, and merchandising metadata
 - Backend architecture designed around maintainability, performance, and secure account flows
+
+---
+
+## Current Demo Status
+
+The project is currently deployed in a test environment at [https://luce-byi.pages.dev/](https://luce-byi.pages.dev/).
+
+Important notes:
+
+- The deployed app currently includes a small amount of mock/demo data.
+- Product images are mock images while final photography and catalog preparation are pending.
+- The catalog will be updated continuously as more data is prepared.
+- Mock data is currently available through Categories, with the default opened category exposing `VIEW ALL` for now.
+- Data can be added through the admin form page. Contact me if you want temporary admin access for review.
+- Customer login is designed around WhatsApp-based phone verification. The customer-facing WhatsApp delivery is not enabled yet because the final WhatsApp Business number has not been added/bought.
+- The authentication logic is implemented and currently supports development/test verification flow until the final WhatsApp Business setup is connected.
 
 ---
 
@@ -41,9 +57,17 @@ It includes:
 
 Many small fashion retailers rely on generic ecommerce tools that treat every product like a simple item with a name, price, and image.
 
-That is not enough for headscarves and modest fashion. Customers care about fabric, shape, opacity, color families, printed palettes, matching underscarves, accessories, styling intent, and whether a product works with what they already selected.
+That is often not enough for specialized fashion catalogs, where product presentation, variants, discovery, styling context, and merchandising details affect the shopping experience.
 
-LUCE models those details directly. The platform is built from the perspective of a real business owner who needs the storefront, search, recommendations, and admin tools to reflect how the products are actually sold.
+LUCE models those requirements in the platform while keeping the public showcase focused on product engineering, UX, and architecture rather than exposing internal commercial rules.
+
+---
+
+## Invariant-First Design
+
+The implementation follows an invariant-first design approach: important product rules are enforced in the data model, backend services, and admin workflows before the UI depends on them.
+
+Examples include keeping media mappings, product variants, stock state, catalog attributes, and account/session behavior consistent across storefront, cart, search, and admin flows. This reduces fragile UI-only assumptions and keeps the system easier to maintain as the catalog grows.
 
 ---
 
@@ -68,6 +92,13 @@ LUCE models those details directly. The platform is built from the perspective o
 - Lucene.NET search service
 - Server-side image processing with ImageSharp
 
+### Media Pipeline
+
+- Uploaded product media is converted to WebP server-side with ImageSharp.
+- Standard product uploads generate four storefront-ready versions: thumbnail, compact, detail preview, and detail.
+- Hero images can generate an additional hero-sized version when used for editorial or landing-page surfaces.
+- The goal is to keep image usage explicit instead of serving oversized originals into every UI context.
+
 ---
 
 ## Product Experience
@@ -84,9 +115,9 @@ The mobile experience uses familiar app-like patterns such as bottom sheets, qui
 
 ## Navigation And Discovery
 
-Navigation is organized around how customers shop this category: by shape, purpose, fabric, styling need, and accessory type instead of only generic menu labels.
+Navigation is organized around how customers shop the catalog instead of relying only on generic menu labels.
 
-Customers can browse scarf categories, essentials, basics, extensions, and accessories with supporting imagery. One category section opens by default to give a clear starting point while still exposing the full product structure.
+Customers can browse product groups with supporting imagery. In the demo, Categories currently opens with `VIEW ALL` as the default broad entry point.
 
 <img src="assets/screenshots/mobile/mobile-navigation-menu.png" alt="Mobile navigation" width="260" />
 
@@ -96,9 +127,9 @@ Customers can browse scarf categories, essentials, basics, extensions, and acces
 
 ## Product Browsing
 
-The product grid keeps attention on the products while still exposing the information that matters for scarf shopping.
+The product grid keeps attention on the products while still exposing the information needed for confident browsing.
 
-Plain products can show selectable color swatches that update the product image. Printed products can show compact palette previews, with fuller color details available from the product detail or quick-view flow.
+Products can show variant-aware visuals and compact color or palette indicators, with fuller details available from the product detail or quick-view flow.
 
 <img src="assets/screenshots/mobile/mobile-product-grid.png" alt="Mobile product grid" width="260" />
 
@@ -118,15 +149,13 @@ Product details open without interrupting the browsing flow. On mobile, details 
 
 Search is powered by Lucene.NET and designed around structured ecommerce discovery, not only free-text product lookup.
 
-The system interprets customer intent around attributes such as category, fabric, color, texture, print, size, and tags. It supports strict, relaxed, and fuzzy fallback search stages, inventory-aware suggestions, and dynamic refinements that stay useful without losing the customer's intent.
-
-For example, a query like `Sky Blue Cotton` can be treated as structured intent: color = Sky Blue and fabric = Cotton. Lulua for instance, in the screenshot, is a variant of cotton, while navy is of the same color family as Sky Blue. These family members are detected but get a lower search score. The main results too can stay precise while refinements still help the customer explore related available inventory.
+The system supports attribute-aware results, suggestions, refinements, and typo-tolerant behavior while keeping the storefront experience simple for customers.
 
 <img src="assets/screenshots/mobile/mobile-search-results.png" alt="Mobile search results" width="260" />
 
 <img src="assets/screenshots/mobile/mobile-search-refinement-sheet.png" alt="Search refinement sheet" width="260" />
 
-Recommendations are placement-aware and color-aware. Matching logic can use selected scarf colors, printed palettes, cart contents, customer behavior, and product classification to suggest useful essentials, accessories, or inspiration products.
+Recommendations are placement-aware and context-aware. They support multiple storefront surfaces without treating every product as the same kind of upsell.
 
 <img src="assets/screenshots/mobile/mobile-recommendation-sheet.png" alt="Recommendation sheet" width="260" />
 
@@ -141,11 +170,11 @@ Detailed writeups:
 
 The cart is designed as part of the shopping experience rather than a disconnected final page. It supports variant-aware cart items, quantity updates, item deletion, total price display, and contextual recommendations.
 
-Essentials can be quick-added with a recommended color, while main scarves are shown as inspiration with a `VIEW` action instead of receiving an unwanted preselected color.
-
 <img src="assets/screenshots/mobile/mobile-cart.png" alt="Mobile cart" width="260" />
 
-Customer accounts use short-lived JWT access tokens and database-backed refresh tokens stored in `HttpOnly` cookies. Guest browsing remains available, and guest recommendation sessions can be connected to a customer profile after login or signup.
+Customer accounts are designed around phone verification, short-lived JWT access tokens, and database-backed refresh tokens stored in `HttpOnly` cookies. Guest browsing remains available.
+
+In the current test deployment, the customer WhatsApp login flow is not connected to a production WhatsApp Business number yet. The supporting logic is available and will be enabled in the final stage once the WhatsApp Business number is added.
 
 Detailed writeup:
 
@@ -155,9 +184,11 @@ Detailed writeup:
 
 ## Admin Platform
 
-The admin workspace supports catalog workflows where color accuracy, product imagery, fabric metadata, stock state, search behavior, and recommendation behavior directly affect the storefront.
+The admin workspace supports catalog workflows where product imagery, attributes, stock state, search behavior, and merchandising metadata directly affect the storefront.
 
-Admin functionality includes product creation and editing, reusable attribute libraries, category and inventory management, plain versus printed product configuration, product-level and color-specific image mapping, media validation, and recommendation classification fields.
+Admin functionality includes product creation and editing, reusable attribute libraries, category and inventory management, variant-aware configuration, media mapping, media validation, and merchandising fields.
+
+The test deployment can be reviewed with mock data. If you want access to the admin form page to add or inspect data, contact me for a temporary login.
 
 ![Admin product workspace](assets/screenshots/admin/admin-product-workspace.png)
 
@@ -175,7 +206,7 @@ The backend follows a layered architecture:
 Controller -> Service -> Repository -> DbContext -> PostgreSQL
 ```
 
-The platform separates storefront behavior, catalog management, search indexing, recommendation logic, authentication, and media handling into focused backend responsibilities. Lucene search results are separated from relational product retrieval, and performance-sensitive areas use cached vocabulary, indexed fields, stored Lucene fields, and bounded result windows.
+The platform separates storefront behavior, catalog management, search indexing, recommendations, authentication, and media handling into focused backend responsibilities. Lucene search results are separated from relational product retrieval, and performance-sensitive areas are designed with practical caching, indexing, and bounded result handling.
 
 Detailed writeups:
 
@@ -192,10 +223,11 @@ LUCE demonstrates full-stack product engineering across frontend, backend, searc
 The strongest parts of the project are:
 
 - Building software around a real business domain rather than a generic demo brief
-- Translating niche product behavior into data models, UI flows, and backend logic
+- Translating specialized catalog behavior into data models, UI flows, and backend boundaries
+- Applying invariant-first design so important catalog rules are enforced consistently
 - Designing a premium mobile-first ecommerce experience
-- Implementing structured Lucene.NET search with suggestions, facets, and fallback behavior
-- Building color-aware recommendations for scarf-to-essential matching
+- Implementing structured Lucene.NET search with suggestions and refinements
+- Building context-aware recommendation surfaces
 - Designing secure account sessions with refresh-token rotation
 - Creating admin workflows that support real catalog operations
 - Thinking about performance, maintainability, and launch-readiness from the start
