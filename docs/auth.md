@@ -1,6 +1,6 @@
 # Authentication Model
 
-LUCE includes customer and admin authentication built around short-lived JWT access tokens and database-backed refresh tokens.
+LUCE includes customer and admin authentication built around token-based sessions and protected admin access.
 
 The goal is to support secure customer accounts without interrupting the guest shopping experience. Customers can browse products, search, use cart flows, and continue shopping without logging in.
 
@@ -8,12 +8,10 @@ The goal is to support secure customer accounts without interrupting the guest s
 
 ## Session Model
 
-- Access tokens are returned to the frontend after login or signup
-- Refresh tokens are stored in an `HttpOnly` cookie
-- Refresh tokens are hashed before being stored in the database
-- Expired or revoked refresh tokens cannot be reused
-- Refresh token rotation is used when refreshing a session
-- Logout and logout-from-all-devices behavior is supported through the refresh token model
+- Customer sessions are designed to avoid interrupting guest browsing
+- Session state is handled through backend-controlled account flows
+- Sensitive session handling is kept out of frontend-only storage patterns
+- Logout and multi-device session behavior are supported by the backend model
 
 ---
 
@@ -23,16 +21,13 @@ Customer accounts are designed to support:
 
 - Saved delivery details
 - Faster checkout
-- Personalized recommendations
 - Order history
 - Account preferences
 
-Guest shopping remains available, and guest recommendation sessions can be connected to the customer profile after login or signup.
+Guest shopping remains available, with account features layered on top when the customer chooses to sign in.
 
 ---
 
 ## Admin Accounts
 
-Admins use the same login flow, but receive an admin role claim in the access token.
-
-Admin-only routes are protected with role-based authorization, and admin account creation is restricted to authenticated admins.
+Admin-only routes and account-management actions are protected through backend authorization.

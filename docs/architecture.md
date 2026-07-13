@@ -15,10 +15,10 @@ Controller -> Service -> Repository -> DbContext -> PostgreSQL
 The backend handles:
 
 - Product catalog management
-- Categories, colors, palettes, fabrics, textures, and tags
-- Product images and color-specific media mapping
+- Reusable catalog attributes
+- Product images and media mapping
 - Inventory behavior
-- Recommendation logic
+- Recommendation services
 - Customer authentication and refresh-token sessions
 - Admin authorization
 - Lucene.NET indexing and search retrieval
@@ -30,7 +30,7 @@ The backend handles:
 
 Search behavior is separated from relational product retrieval.
 
-Lucene handles full-text and structured retrieval, suggestions, indexed vocabulary, stored fields, facets, and search-stage behavior. Relational product retrieval handles the hydrated storefront shapes needed by the frontend.
+Lucene handles search-oriented retrieval, suggestions, and indexed discovery metadata. Relational product retrieval handles the hydrated storefront shapes needed by the frontend.
 
 This separation keeps search fast and keeps the product API aligned with actual UI needs instead of returning generic database entities.
 
@@ -40,7 +40,7 @@ This separation keeps search fast and keeps the product API aligned with actual 
 
 The frontend focuses on product presentation, controlled search state, cart interactions, quick-view flows, bottom sheets, filters, mobile gestures, and responsive desktop/mobile layouts.
 
-State is kept lightweight. Local UI state is separated from submitted search state so the customer can type, review suggestions, and explicitly run searches without the product grid changing unexpectedly.
+State is kept lightweight and organized around actual UI behavior so customer interactions remain predictable across mobile and desktop.
 
 ---
 
@@ -49,8 +49,8 @@ State is kept lightweight. Local UI state is separated from submitted search sta
 The architecture is designed around maintainability and eventual business launch:
 
 - Clear backend layering
-- Domain-specific product models
-- Dedicated search and recommendation logic
+- Domain-aware product models
+- Dedicated search and recommendation boundaries
 - Secure account sessions
 - Admin workflows for catalog operations
 - Performance-aware query and cache boundaries

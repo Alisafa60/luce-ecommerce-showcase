@@ -1,8 +1,8 @@
 # Admin Workflows
 
-LUCE includes admin-facing catalog workflows for managing products, attributes, media, inventory, recommendation data, and product discovery data.
+LUCE includes admin-facing workflows for managing the catalog, media, inventory, and storefront metadata.
 
-The admin workspace is designed for catalog work where color accuracy, product imagery, fabric metadata, stock state, product presentation, search behavior, and recommendation behavior directly affect the shopping experience.
+The public showcase describes the admin platform at a product-engineering level without exposing the full operational workflow or domain-specific rules.
 
 ---
 
@@ -10,22 +10,18 @@ The admin workspace is designed for catalog work where color accuracy, product i
 
 Admin functionality includes:
 
-- Product creation and editing through a multi-step workspace
-- Category, fabric, texture, tag, color, pricing, and inventory management
-- Attribute library workflows for maintaining reusable catalog metadata
-- Plain versus printed product configuration
-- Product-level and color-specific image mapping
-- Draft autosave for product creation flows
-- Media validation to keep product images aligned with product records
-- Server-side media optimization for storefront, detail, and preview usage
-- Essential product marking for recommendation behavior
-- Product classification fields used by search and recommendations
-- Protected admin account creation
+- Product creation and editing
+- Reusable catalog attributes
+- Category and inventory management
+- Variant-aware product setup
+- Product media mapping and validation
+- Server-side media preparation for storefront use
+- Protected admin-only access
 
 ---
 
 ## Business Value
 
-The admin platform is not just a CRUD interface. It exists to keep the catalog accurate enough for the storefront, search, filters, recommendations, and cart behavior to work correctly.
+The admin platform is more than a generic CRUD interface. It exists to keep the storefront, search, filters, cart, recommendations, and media presentation aligned with the same catalog source of truth.
 
-That matters because scarf products often depend on relationships between fabric, shape, color, palette, image state, product family, and styling purpose.
+This makes the system easier to maintain as more products and real launch data are added.

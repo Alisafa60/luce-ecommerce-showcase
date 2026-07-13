@@ -176,7 +176,7 @@ Recommendations are placement-aware and context-aware. They support multiple sto
 
 <img src="assets/screenshots/mobile/mobile-recommendation-sheet.png" alt="Recommendation sheet" width="260" />
 
-Detailed writeups:
+High-level notes:
 
 - [Search design](docs/search.md)
 - [Recommendation system](docs/recommendations.md)
@@ -193,7 +193,7 @@ Customer accounts are designed around phone verification, short-lived JWT access
 
 In the current test deployment, the customer WhatsApp login flow is not connected to a production WhatsApp Business number yet. The supporting logic is available and will be enabled in the final stage once the WhatsApp Business number is added.
 
-Detailed writeup:
+High-level note:
 
 - [Authentication model](docs/auth.md)
 
@@ -209,7 +209,7 @@ The test deployment can be reviewed with mock data. If you want access to the ad
 
 ![Admin product workspace](assets/screenshots/admin/admin-product-workspace.png)
 
-Detailed writeup:
+High-level note:
 
 - [Admin workflows](docs/admin-workflows.md)
 
@@ -225,7 +225,7 @@ Controller -> Service -> Repository -> DbContext -> PostgreSQL
 
 The platform separates storefront behavior, catalog management, search indexing, recommendations, authentication, and media handling into focused backend responsibilities. Lucene search results are separated from relational product retrieval, and performance-sensitive areas are designed with practical caching, indexing, and bounded result handling.
 
-Detailed writeups:
+High-level notes:
 
 - [Architecture](docs/architecture.md)
 - [Data modeling](docs/data-modeling.md)

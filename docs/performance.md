@@ -12,10 +12,10 @@ Important considerations include:
 - Returning product card data in frontend-friendly shapes
 - Avoiding unnecessary over-fetching
 - Designing APIs around actual UI usage instead of generic data dumping
-- Indexing frequently queried relational fields used by search, catalog browsing, recommendations, authentication, and personalization
-- Keeping recommendation and authentication queries efficient as customer behavior, cart context, and catalog size grow
+- Indexing frequently queried relational fields
+- Keeping account, catalog, search, and recommendation queries efficient as usage grows
 
-Relevant database fields are indexed to improve lookup performance for product discovery, recommendations, authentication, and account flows.
+Relevant database fields are indexed to improve lookup performance across customer-facing and admin-facing flows.
 
 ---
 
@@ -24,10 +24,9 @@ Relevant database fields are indexed to improve lookup performance for product d
 Search performance considerations include:
 
 - Separating Lucene search results from relational product retrieval
-- Using Lucene-stored fields for fast facet calculation
-- Capping search and facet result windows to avoid expensive reads
-- Caching search responses, suggestions, inventory vocabulary, and disjunctive facets
-- Versioning search cache entries so index rebuilds and product updates invalidate stale results naturally
+- Keeping search-oriented reads bounded
+- Caching search-related responses where useful
+- Invalidating stale search data when catalog updates occur
 
 ---
 

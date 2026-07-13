@@ -1,62 +1,33 @@
 # Recommendation System
 
-LUCE includes a placement-aware recommendation system designed around a scarf-first ecommerce model.
+LUCE includes a context-aware recommendation system for storefront, cart, and discovery surfaces.
 
-Recommendations are not treated as generic upsells. They adapt based on where they appear in the shopping flow and use product context, selected colors, cart contents, and customer behavior to suggest items that feel useful and relevant.
-
----
-
-## Placements
-
-Recommendation placements include:
-
-- Add-to-cart popup: matching essentials for the scarf or color the customer just added
-- Cart recommendations: useful add-ons and style inspiration based on the full cart
-- Home page: broader personalized picks, with preference toward main scarves
-- Search empty state: personalized starter picks before the customer searches
+The public showcase keeps recommendation details intentionally high-level. The implementation contains more domain-specific logic than is documented here.
 
 ---
 
-## Color-Aware Essentials
+## Approach
 
-For essentials such as underscarves, bonnets, basics, extensions, and accessories, recommendations can use the selected scarf color when available.
+Recommendations are designed to feel useful inside the shopping flow rather than appearing as generic upsells.
 
-The matching flow prioritizes:
+The system can account for:
 
-1. Exact color match
-2. Closest wearable color using perceptual color distance
-3. Same color-family match
-4. Soft neutral fallback
-
-This is especially useful for products like underscarves and bonnets, where customers often want a matching or complementary color.
-
-The scarf-to-underscarf matching logic uses CIEDE2000 color distance with hue and lightness guards to avoid visually poor matches. Manual styling metadata such as color temperature, mood, neutral group, and soft-neutral classification can provide small scoring nudges, but the core matching remains visual and still works for colors without metadata.
-
-For printed scarves, recommendation logic evaluates configured palette colors such as base, dominant, and printed colors, then chooses the best overall match instead of assuming one color should always drive the recommendation.
+- Where the recommendation appears in the customer journey
+- Product context from the current page or cart
+- Available catalog and inventory state
+- Customer or guest-session behavior when available
+- Product relationships managed through the admin workflow
 
 ---
 
-## Cart-Aware Logic
+## Storefront Behavior
 
-Cart recommendations separate two different recommendation goals:
+Recommendation surfaces are used in places where they can support browsing or checkout without interrupting the customer.
 
-- Essentials are shown as quick-add items with a recommended color
-- Main scarves are shown as inspiration with a `VIEW` action instead of quick-add
-
-This prevents main scarves from receiving an unwanted preselected color, while still allowing color-matched essentials to be added quickly.
+Examples include cart suggestions, add-to-cart follow-ups, home page discovery, and empty-state discovery surfaces.
 
 ---
 
-## Preference Tracking
+## Engineering Notes
 
-The system tracks customer behavior to improve personalization over time.
-
-Tracked events include:
-
-- Product views
-- Add to cart
-- Recommendation clicks
-- Recommendation add-to-cart
-- Purchases
-
-Guest sessions are tracked with a local recommendation session id and can be merged into the customer profile after login or signup.
+Recommendation logic is kept behind backend boundaries instead of being hardcoded into UI components. This allows the storefront to render consistent recommendation results while the backend owns the rules, data access, and performance considerations.
