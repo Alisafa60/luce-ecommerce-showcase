@@ -1,6 +1,6 @@
 # LUCE Ecommerce Platform Showcase
 
-LUCE is a full-stack ecommerce platform designed for modest fashion and headscarf retail.
+LUCE is a mobile-first full-stack ecommerce platform designed for modest fashion and headscarf retail.
 
 The project was built from the perspective of a business owner in a niche retail space where generic ecommerce tools often fall short. LUCE focuses on a premium mobile-first storefront, structured catalog discovery, secure account flows, and admin workflows that support real product preparation before launch.
 
